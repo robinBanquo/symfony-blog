@@ -1,1 +1,19 @@
-Hello World!
+{% extends "::base.html.twig" %}
+    {% block title %}
+        Blog index
+    {% endblock %}
+    {% block body %}
+        <h1>Liste des articles</h1>
+        <div class="col-sm-10 col-sm-offset-1">
+        {% for post in listPosts %}
+            <div>
+                <h4>{{ post.title }}</h4>
+                <p>{{ post.content }}</p>
+                {% if loop.last == false %}
+                <hr>
+                {% endif %}
+            </div>
+
+        {% endfor %}
+        </div>
+    {% endblock %}
