@@ -68,4 +68,16 @@ class DefaultController extends Controller
             'form' =>$form->createview(),
         ));
     }
+
+    public function showAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('BlogBundle:Post');
+        $Post = $repository->findOneBy(array("id" =>$id));
+
+
+        return $this->render('BlogBundle:Default:show.html.twig', array(
+            "Post" => $Post,
+        ));
+    }
 }

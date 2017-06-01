@@ -5,3 +5,10 @@ blog_homepage:
 add_article:
     path: /add
     defaults: { _controller: BlogBundle:Default:add}
+
+show:
+    path: /{id}
+    defaults:
+        _controller : BlogBundle:Default:show
+    requirements:
+            id: \d+
