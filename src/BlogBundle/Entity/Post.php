@@ -3,6 +3,7 @@
 namespace BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Post
@@ -35,6 +36,24 @@ class Post
      */
     private $content;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="edited", type="boolean")
+     */
+    private $edited;
+
+    /**
+     *
+     * @ORM\Column(name="modifiedat", type="datetime")
+     */
+    private $modifiedat ;
+
+    public function __construct()
+    {
+        $this->modifiedat = new \DateTime();
+        $this->edited = false;
+    }
 
     /**
      * Get id
@@ -92,6 +111,38 @@ class Post
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getModifiedat()
+    {
+        return $this->modifiedat;
+    }
+
+    /**
+     * @param mixed $modifiedat
+     */
+    public function setModifiedat()
+    {
+        $this->modifiedat = new \DateTime();
+    }
+
+    /**
+     * @param bool $edited
+     */
+    public function setEdited($edited)
+    {
+        $this->edited = $edited;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEdited()
+    {
+        return $this->edited;
     }
 }
 

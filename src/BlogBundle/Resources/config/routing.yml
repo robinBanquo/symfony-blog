@@ -6,9 +6,21 @@ add_article:
     path: /add
     defaults: { _controller: BlogBundle:Default:add}
 
-show:
+blog_show:
     path: /{id}
     defaults:
         _controller : BlogBundle:Default:show
+    requirements:
+            id: \d+
+edit:
+    path: /edit/{id}
+    defaults:
+        _controller : BlogBundle:Default:edit
+    requirements:
+            id: \d+
+delete:
+    path: /delete/{id}
+    defaults:
+        _controller : BlogBundle:Default:delete
     requirements:
             id: \d+

@@ -10,4 +10,8 @@ namespace BlogBundle\Repository;
  */
 class PostRepository extends \Doctrine\ORM\EntityRepository
 {
+//    public function myFindFirst($nbPost)
+//    {
+//        $queryBuilder = $this->createQueryBuilder()
+//    }
 }
