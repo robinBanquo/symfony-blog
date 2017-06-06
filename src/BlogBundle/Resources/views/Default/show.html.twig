@@ -9,6 +9,7 @@
         <a href="/delete/{{ Post.id }}" class="text-danger">Supprimer l'article</a>
         <div class="comments">
             <h3>Commentaires</h3>
+            {{ form(form) }}
             {% for comment in Comments %}
                 <hr>
                 <div class="row">

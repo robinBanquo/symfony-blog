@@ -23,6 +23,9 @@
                         <a href="/{{ post.id }}">... <i>lire la suite</i></a>
                     {% endif %}
                 </p>
+                {% if post.nbOfComments() > 0 %}
+                <small class="text-muted">{{ post.nbOfComments }} commentaires</small>
+                {% endif %}
                 {% if loop.last == false %}
                 <hr>
                 {% endif %}

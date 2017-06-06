@@ -170,5 +170,10 @@ class Post
     {
         return $this->edited;
     }
+
+    public function nbOfComments(){
+        return $this->comments->count();
+
+    }
 }
 
