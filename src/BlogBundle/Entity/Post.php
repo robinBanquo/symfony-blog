@@ -2,6 +2,7 @@
 
 namespace BlogBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTime;
 
@@ -13,6 +14,13 @@ use Symfony\Component\Validator\Constraints\DateTime;
  */
 class Post
 {
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="BlogBundle\Entity\Comment", mappedBy="post")
+     */
+    private $comments;
+
     /**
      * @var int
      *
@@ -53,6 +61,24 @@ class Post
     {
         $this->modifiedat = new \DateTime();
         $this->edited = false;
+        $this->comments = new ArrayCollection();
+    }
+
+    public function addComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        $comment->setPost($this);
+    }
+
+    public function removeComment(Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    public function getComments()
+    {
+        return $this->comments;
     }
 
     /**

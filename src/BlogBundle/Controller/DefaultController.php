@@ -52,8 +52,10 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('BlogBundle:Post');
         $Post = $repository->find($id);
+        $Comments = $Post->getComments();
         return $this->render('BlogBundle:Default:show.html.twig', array(
             'Post' => $Post,
+            'Comments' => $Comments
         ));
     }
 

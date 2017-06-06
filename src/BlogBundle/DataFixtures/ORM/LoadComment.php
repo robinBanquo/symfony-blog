@@ -26,7 +26,7 @@ class LoadComment extends AbstractFixture implements OrderedFixtureInterface
 
         for ( $i =0 ; $i < 20; $i++ ){
             $repository = $manager->getRepository('BlogBundle:Post');
-            $Post = $repository->find(8%($i+1));
+            $Post = $repository->find($i%8);
             $comment = new Comment();
             $comment->setPost( $Post );
             $comment->setAuthor('commentateur num '.$i);

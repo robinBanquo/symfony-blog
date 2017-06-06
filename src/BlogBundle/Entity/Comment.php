@@ -14,7 +14,7 @@ class Comment
 {
 
     /**
-     * @ORM\ManyToOne(targetEntity="BlogBundle\Entity\Post")
+     * @ORM\ManyToOne(targetEntity="BlogBundle\Entity\Post", inversedBy="comments")
      * @ORM\JoinColumn
      */
     private $post;
@@ -183,6 +183,12 @@ class Comment
     {
         $this->post = $Post;
         return $this;
+    }
+    public function getModifiedDiff()
+    {
+        $now = new \DateTime();
+        $Diff = $now->diff($this->modifiedAt)->format("%h heures %i minutes %s s");
+        return $Diff;
     }
 }
 
