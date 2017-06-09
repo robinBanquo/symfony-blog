@@ -61,16 +61,19 @@ class Post
     {
         $this->modifiedat = new \DateTime();
         $this->edited = false;
+        //comme un post peut avoir plusieurs commentaires, on déclare que l'attribut comment sera un arrayCllection
         $this->comments = new ArrayCollection();
     }
-
+//les deux méthodes suivantes permettent de manipuler les commentaires d'un article
+//ajout d'un commentaire
     public function addComment(Comment $comment)
     {
         $this->comments[] = $comment;
-
+//on doit définir la relation dans l'entité proprietaire
         $comment->setPost($this);
     }
 
+    //supression d'un "lien vers un commentaire lié a l'article
     public function removeComment(Comment $comment)
     {
         $this->comments->removeElement($comment);
@@ -171,6 +174,10 @@ class Post
         return $this->edited;
     }
 
+    /**
+     * renvoie le nombre de commentaires liés a un post
+     * @return int
+     */
     public function nbOfComments(){
         return $this->comments->count();
 
