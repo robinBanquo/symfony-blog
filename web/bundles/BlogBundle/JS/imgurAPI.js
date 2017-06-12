@@ -27,7 +27,7 @@ $(document).ready(function () {
                         'type': 'base64'
                     },
                     success: function(response) {
-                        $('#form_image_url').text(response.data.link);
+                        $('#form_image_url').val( response.data.link);
                     },
                     error: function() {
                         alert("Error while uploading...");

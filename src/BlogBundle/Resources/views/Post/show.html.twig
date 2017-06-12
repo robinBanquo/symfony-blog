@@ -12,7 +12,7 @@
                 <a href="/delete/{{ Post.id }}" class="text-danger">Supprimer l'article</a>
             </div>
             <div class="col-md-3">
-                <img src="{{ Post.image.url }}" alt="" class="thumbnail">
+                <img src="{{ Post.image.url }}" alt="" class="thumbnail" width="100%">
             </div>
         </div>
         {{ render(controller("BlogBundle:Comment:listByPost", {'id' : Post.id })) }}
