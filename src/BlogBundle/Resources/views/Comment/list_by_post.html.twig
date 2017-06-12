@@ -1,0 +1,11 @@
+<div class="comments">
+    <h3>Commentaires</h3>
+    {{ form(form) }}
+    {% for comment in Comments %}
+        <hr>
+        <div class="row">
+            <div class="col-sm-2"><strong>auteur : {{ comment.author }}</strong><br><small>{{ comment.GetModifiedDiff()}}</small></div>
+            <div class="col-sm-10"><em>{{ comment.content }}</em></div>
+        </div>
+    {% endfor %}
+</div>

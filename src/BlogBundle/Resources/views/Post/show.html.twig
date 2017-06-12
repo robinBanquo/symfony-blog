@@ -1,0 +1,11 @@
+{% extends "::base.html.twig" %}
+    {% block title %}
+        Ajouter un article
+    {% endblock %}
+    {% block body %}
+        <h1>{{ Post.title }}</h1>
+        <p>{{ Post.content }}</p>
+        <a href="/edit/{{ Post.id }}">Editer l'article</a> |
+        <a href="/delete/{{ Post.id }}" class="text-danger">Supprimer l'article</a>
+        {{ render(controller("BlogBundle:Comment:listByPost", {'id' : Post.id })) }}
+    {% endblock %}

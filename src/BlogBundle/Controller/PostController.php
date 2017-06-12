@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
-class DefaultController extends Controller
+class PostController extends Controller
 {
     public function indexAction()
     {
@@ -18,7 +18,7 @@ class DefaultController extends Controller
         $repository = $em->getRepository('BlogBundle:Post');
         $listPosts = $repository->findAll();
 
-        return $this->render('BlogBundle:Default:index.html.twig', array(
+        return $this->render('BlogBundle:Post:index.html.twig', array(
             "listPosts" => $listPosts,
         ));
     }
@@ -43,7 +43,7 @@ class DefaultController extends Controller
             $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
             return $this->redirectToRoute('blog_homepage');
         }
-        return $this->render('BlogBundle:Default:add.html.twig', array(
+        return $this->render('BlogBundle:Post:add.html.twig', array(
             'form' =>$form->createview(),
         ));
     }
@@ -53,33 +53,9 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('BlogBundle:Post');
         $Post = $repository->find($id);
-        $Comments = $Post->getComments();
 
-        $commentToAdd = new Comment();
-        $commentToAdd->setPost($Post);
-        $formBuilder = $this->get('form.factory')->createBuilder(FormType::class, $commentToAdd);
-        $formBuilder
-            ->add('author',     TextType::class)
-            ->add('content',   TextareaType::class)
-            ->add('save',      SubmitType::class)
-        ;
-        $form = $formBuilder->getForm();
-
-        if ($request->isMethod('POST')) {
-            $form->handleRequest($request);
-            // On vérifie que les valeurs entrées sont correctes
-            // On enregistre notre objet $advert dans la base de données, par exemple
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($commentToAdd);
-            $em->flush();
-            $request->getSession()->getFlashBag()->add('notice', 'Commentaire ajouté');
-
-            return $this->redirectToRoute('blog_show', array('id'=>$id));
-        }
-        return $this->render('BlogBundle:Default:show.html.twig', array(
-            'Post' => $Post,
-            'Comments' => $Comments,
-            'form' =>$form->createview()
+        return $this->render('BlogBundle:Post:show.html.twig', array(
+            'Post' => $Post
         ));
     }
 
@@ -107,7 +83,7 @@ class DefaultController extends Controller
         }
 
         else {
-            return $this->render('BlogBundle:Default:edit.html.twig', array(
+            return $this->render('BlogBundle:Post:edit.html.twig', array(
                 'form' => $form->createview(),
                 'Post' => $Post,
             ));
