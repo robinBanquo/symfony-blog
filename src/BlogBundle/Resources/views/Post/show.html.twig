@@ -4,8 +4,16 @@
     {% endblock %}
     {% block body %}
         <h1>{{ Post.title }}</h1>
-        <p>{{ Post.content }}</p>
-        <a href="/edit/{{ Post.id }}">Editer l'article</a> |
-        <a href="/delete/{{ Post.id }}" class="text-danger">Supprimer l'article</a>
+        <div class="row">
+            <div class="col-md-9">
+
+                <p>{{ Post.content }}</p>
+                <a href="/edit/{{ Post.id }}">Editer l'article</a> |
+                <a href="/delete/{{ Post.id }}" class="text-danger">Supprimer l'article</a>
+            </div>
+            <div class="col-md-3">
+                <img src="{{ Post.image.url }}" alt="" class="thumbnail">
+            </div>
+        </div>
         {{ render(controller("BlogBundle:Comment:listByPost", {'id' : Post.id })) }}
     {% endblock %}

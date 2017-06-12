@@ -15,11 +15,6 @@ use Symfony\Component\Validator\Constraints\DateTime;
 class Post
 {
 
-    /**
-     *
-     * @ORM\OneToMany(targetEntity="BlogBundle\Entity\Comment", mappedBy="post")
-     */
-    private $comments;
 
     /**
      * @var int
@@ -29,6 +24,19 @@ class Post
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="BlogBundle\Entity\Comment", mappedBy="post")
+     */
+    private $comments;
+
+    /**
+     * @var string
+     * @ORM\OneToOne(targetEntity="BlogBundle\Entity\Image", cascade={"persist"})
+     *
+     */
+    private $image;
 
     /**
      * @var string
@@ -181,6 +189,17 @@ class Post
     public function nbOfComments(){
         return $this->comments->count();
 
+    }
+
+    public function setImage(Image $image = null)
+    {
+        $this->image = $image;
+    }
+
+
+    public function getImage()
+    {
+        return $this->image;
     }
 }
 

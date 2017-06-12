@@ -2,7 +2,8 @@
 
 namespace BlogBundle\Controller;
 
-use BlogBundle\Entity\Comment;
+
+use BlogBundle\Form\ImageType;
 use BlogBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -26,10 +27,12 @@ class PostController extends Controller
     public function addAction(Request $request)
     {
         $post = new Post();
+
         $formBuilder = $this->get('form.factory')->createBuilder(FormType::class, $post);
         $formBuilder
             ->add('title',     TextType::class)
             ->add('content',   TextareaType::class)
+            ->add('image', ImageType::class)
             ->add('save',      SubmitType::class)
         ;
         $form = $formBuilder->getForm();

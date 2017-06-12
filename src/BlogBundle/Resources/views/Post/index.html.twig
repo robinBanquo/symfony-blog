@@ -6,31 +6,37 @@
         <h1>Liste des articles</h1>
         <div class="col-sm-10 col-sm-offset-1">
         {% for post in listPosts %}
-            <div>
-                <h4><a href="/{{ post.id }}">{{ post.title }}</a></h4>
-                <p class="text-muted">
-                    <small>
-                        {% if post.isEdited %}
-                            Edité le :
-                        {% else %}
-                            Créé le :
+            <div class="row">
+                <div class="col-sm-2">
+                    <img src="{{ post.image.url }}" alt="" width="100%">
+                </div>
+                <div class="col-sm-10">
+                    <h4><a href="/{{ post.id }}">{{ post.title }}</a></h4>
+                    <p class="text-muted">
+                        <small>
+                            {% if post.isEdited %}
+                                Edité le :
+                            {% else %}
+                                Créé le :
+                            {% endif %}
+                            {{ post.modifiedat | date("d/m/Y à H/i") }}
+                        </small>
+                    </p>
+                    <p>{{ post.content[:400] }}
+                        {% if post.content | length > 400 %}
+                            <a href="/{{ post.id }}">... <i>lire la suite</i></a>
                         {% endif %}
-                        {{ post.modifiedat | date("d/m/Y à H/i") }}
-                    </small>
-                </p>
-                <p>{{ post.content[:400] }}
-                    {% if post.content | length > 400 %}
-                        <a href="/{{ post.id }}">... <i>lire la suite</i></a>
+                    </p>
+                    {% if post.nbOfComments() > 0 %}
+                    <small class="text-muted">{{ post.nbOfComments }} commentaires</small>
                     {% endif %}
-                </p>
-                {% if post.nbOfComments() > 0 %}
-                <small class="text-muted">{{ post.nbOfComments }} commentaires</small>
-                {% endif %}
-                {% if loop.last == false %}
-                <hr>
+                    {% if loop.last == false %}
+                </div>
+
+
                 {% endif %}
             </div>
-
+            <hr>
         {% endfor %}
         </div>
     {% endblock %}
