@@ -5,42 +5,35 @@ $(document).ready(function () {
 
     // alert ('mes couilles');
     $('#imgur_select').html(
-        '<form method="POST" id="test" novalidate="novalidate" enctype="multipart/form-data">'+
-        '<label for="imgur_img" class="control-label">Uploader votre image</label>'+
-        '<input type="file" id="imgur_img" class="form-control">'+
-        '</form>');
+        '<label for="imgur_img" class="control-label">Uploader votre image</label>' +
+        '<input type="file" id="image_selector" class="form-control">'+
+        '<img src="none" id="image_preview" class="thumbnail" width="200px"/>'
 
-    $('#imgur_img').change(function () {
+    );
 
-        // var form = new FormData($('#test'));
-        //
-        // var settings = {
-        //     "async": true,
-        //     "crossDomain": true,
-        //     "url": "https://api.imgur.com/3/image",
-        //     "method": "POST",
-        //     "headers": {
-        //         "authorization": "Client-ID 68fae771c81dac4"
-        //     },
-        //     "processData": false,
-        //     "contentType": false,
-        //     "mimeType": "multipart/form-data",
-        //     "data": {image : $('#imgur_img').prop("files")["name"]}
-        // };
-        $.ajax({
-            url: 'https://api.imgur.com/3/image',
-            headers: {
-                'Authorization': 'Client-ID 68fae771c81dac4'
-            },
-            type: 'POST',
-            data: {
-                'image': $('#imgur_img').prop("files")["name"]
-            },
-            success: function() { console.log('cool'); }
+        $("#image_selector").change(function() {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var data = e.target.result.substr(e.target.result.indexOf(",") + 1, e.target.result.length);
+                $("#image_preview").attr("src", e.target.result);
+                $.ajax({
+                    url: 'https://api.imgur.com/3/image',
+                    headers: {
+                        'Authorization': 'Client-ID 68fae771c81dac4'
+                    },
+                    type: 'POST',
+                    data: {
+                        'image': data,
+                        'type': 'base64'
+                    },
+                    success: function(response) {
+                        $('#form_image_url').text(response.data.link);
+                    },
+                    error: function() {
+                        alert("Error while uploading...");
+                    }
+                });
+            };
+            reader.readAsDataURL(this.files[0]);
         });
-        $.ajax(settings).done(function (response) {
-            console.log(response);
-        });
-    })
-
 });
