@@ -4,5 +4,19 @@
     {% endblock %}
     {% block body %}
         <h1>Ajouter un Article</h1>
-        {{ form(form) }}
+        {{ form_start(form) }}
+            {{ form_errors(form) }}
+            {{ form_row(form.title) }}
+            {{ form_row(form.content) }}
+            <div id="imgur_select" class="form-group">
+            </div>
+            <div class="hidden">
+                {{ form_row(form.image) }}
+            </div>
+            {{ form_rest(form) }}
+
+            {{ form_end(form) }}
+    {% endblock %}
+    {% block javascripts %}
+        <script src="{{ asset('bundles/BlogBundle/JS/imgurAPI.js') }}" type="text/javascript"></script>
     {% endblock %}
