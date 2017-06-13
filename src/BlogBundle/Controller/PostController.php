@@ -70,6 +70,7 @@ class PostController extends Controller
         $formBuilder = $this->get('form.factory')->createBuilder(FormType::class, $Post);
         $formBuilder
             ->add('content', TextareaType::class)
+            ->add('image', ImageType::class)
             ->add('save', SubmitType::class);
         $form = $formBuilder->getForm();
         if ($request->isMethod('POST')) {
