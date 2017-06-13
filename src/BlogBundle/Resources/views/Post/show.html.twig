@@ -13,6 +13,11 @@
             </div>
             <div class="col-md-3">
                 <img src="{{ Post.image.url }}" alt="" class="thumbnail" width="100%">
+                <p class="btn-group-vertical btn-block">
+                    {% for category in Post.categories %}
+                        <a href="/category/{{ category.id }}" class="btn btn-warning btn-xs">{{ category.name }}</a>
+                    {% endfor %}
+                </p>
             </div>
         </div>
         {{ render(controller("BlogBundle:Comment:listByPost", {'id' : Post.id })) }}

@@ -12,6 +12,11 @@
                 </div>
                 <div class="col-sm-10">
                     <h4><a href="/{{ post.id }}">{{ post.title }}</a></h4>
+                    <div class="">
+                        {% for category in post.categories %}
+                            <a href="/category/{{ category.id }}" class="btn btn-warning btn-xs">{{ category.name }}</a>
+                        {% endfor %}
+                    </div>
                     <p class="text-muted">
                         <small>
                             {% if post.isEdited %}

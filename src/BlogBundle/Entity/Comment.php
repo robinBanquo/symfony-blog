@@ -176,9 +176,6 @@ class Comment
         return $this->post;
     }
 
-    /**
-     * @param mixed $Post
-     */
     public function setPost($Post)
     {
         $this->post = $Post;

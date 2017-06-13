@@ -24,3 +24,10 @@ delete:
         _controller : BlogBundle:Post:delete
     requirements:
             id: \d+
+
+index_by_category:
+    path: /category/{id}
+    defaults:
+        _controller : BlogBundle:Category:indexByCategory
+    requirements:
+            id : \d+

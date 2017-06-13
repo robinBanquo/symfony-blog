@@ -166,7 +166,7 @@ class Post
     }
 
     /**
-     * @param mixed $modifiedat
+     *
      */
     public function setModifiedat()
     {
