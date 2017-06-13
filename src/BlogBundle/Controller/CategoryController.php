@@ -8,7 +8,7 @@
 
 namespace BlogBundle\Controller;
 
-use BlogBundle\Entity\Comment;
+use BlogBundle\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -24,8 +24,9 @@ public function indexByCategoryAction($id, Request $request)
     $Category = $categoryRepository->find($id);
 
 
-    return $this->render('BlogBundle:Post:index_by_category.html.twig', array(
-        "Category" => $Category,
+    return $this->render('BlogBundle:Category:index_by_category.html.twig', array(
+        "title" => $Category->getName(),
+        "listPosts" => $Category->getPosts()
     ));
 }
 
