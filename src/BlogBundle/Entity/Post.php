@@ -65,12 +65,19 @@ class Post
      */
     private $modifiedat ;
 
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="BlogBundle\Entity\Category", inversedBy="posts")
+     */
+    private $categories;
+
     public function __construct()
     {
         $this->modifiedat = new \DateTime();
         $this->edited = false;
         //comme un post peut avoir plusieurs commentaires, on déclare que l'attribut comment sera un arrayCllection
         $this->comments = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 //les deux méthodes suivantes permettent de manipuler les commentaires d'un article
 //ajout d'un commentaire
@@ -201,5 +208,23 @@ class Post
     {
         return $this->image;
     }
+
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
 }
 
