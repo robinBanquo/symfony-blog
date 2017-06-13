@@ -15,7 +15,8 @@ class LoadCategory extends AbstractFixture implements OrderedFixtureInterface
         "#PoudreDePerlinpinpin",
         "#MonterSesSeinDansLaFriendzone",
         "#RendsLesSous!",
-        "#JaiDébugéLeTrucANadine"];
+        "#JaiDébugéLeTrucANadine",
+        "#LesDevsDeCeBlogSontDesOufs"];
     public function getOrder()
     {
         return 1; // number in which order to load fixtures

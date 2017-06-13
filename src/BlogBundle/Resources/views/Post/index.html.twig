@@ -7,10 +7,12 @@
         <div class="col-sm-10 col-sm-offset-1">
         {% for post in listPosts %}
             <div class="row">
-                <div class="col-sm-2">
-                    <img src="{{ post.image.url }}" alt="" width="100%">
+                <div class="col-sm-3">
+                    <a href="/{{ post.id }}">
+                        <img src="{{ post.image.url }}" alt="" width="100%">
+                    </a>
                 </div>
-                <div class="col-sm-10">
+                <div class="col-sm-9">
                     <h4><a href="/{{ post.id }}">{{ post.title }}</a></h4>
                     <div class="">
                         {% for category in post.categories %}
