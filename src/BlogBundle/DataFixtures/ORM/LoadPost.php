@@ -14,7 +14,7 @@ class LoadPost extends AbstractFixture implements OrderedFixtureInterface
 {
     public function getOrder()
     {
-        return 2; // number in which order to load fixtures
+        return 3; // number in which order to load fixtures
     }
     public function load(ObjectManager $manager)
     {

@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 class PostController extends Controller
 {
     public function indexAction()
@@ -33,6 +34,12 @@ class PostController extends Controller
             ->add('title',     TextType::class)
             ->add('content',   TextareaType::class)
             ->add('image', ImageType::class)
+            ->add('categories', EntityType::class, array(
+                'class'        => 'BlogBundle:Category',
+                'choice_label' => 'name',
+                'multiple'     => true,
+                'expanded'     => true,
+            ))
             ->add('save',      SubmitType::class)
         ;
         $form = $formBuilder->getForm();
@@ -71,6 +78,12 @@ class PostController extends Controller
         $formBuilder
             ->add('content', TextareaType::class)
             ->add('image', ImageType::class)
+            ->add('categories', EntityType::class, array(
+                'class'        => 'BlogBundle:Category',
+                'choice_label' => 'name',
+                'multiple'     => true,
+                'expanded'     => true,
+            ))
             ->add('save', SubmitType::class);
         $form = $formBuilder->getForm();
         if ($request->isMethod('POST')) {

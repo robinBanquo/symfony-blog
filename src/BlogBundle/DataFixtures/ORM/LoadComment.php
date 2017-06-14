@@ -17,7 +17,7 @@ class LoadComment extends AbstractFixture implements OrderedFixtureInterface
 {
     public function getOrder()
     {
-        return 3; // number in which order to load fixtures
+        return 4; // number in which order to load fixtures
     }
 
     public function load(ObjectManager $manager)
