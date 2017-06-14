@@ -25,6 +25,14 @@ class Post
      */
     private $id;
 
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="posts")
+     *
+     */
+    private $user;
+
     /**
      *
      * @ORM\OneToMany(targetEntity="BlogBundle\Entity\Comment", mappedBy="post")
@@ -224,6 +232,22 @@ class Post
     public function removeCategory(Category $category)
     {
         $this->categories->removeElement($category);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 
 }

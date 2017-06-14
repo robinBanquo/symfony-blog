@@ -2,6 +2,7 @@
 
 namespace UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -21,6 +22,13 @@ class User implements UserInterface
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="BlogBundle\Entity\Post", mappedBy="user")
+     *
+     */
+    private $posts;
 
     /**
      * @var string
@@ -49,6 +57,11 @@ class User implements UserInterface
      * @ORM\Column(name="roles", type="array")
      */
     private $roles = array();
+
+    public function __construct()
+    {
+        $this->posts = new ArrayCollection();
+    }
 
     public function eraseCredentials()
     {
@@ -159,5 +172,14 @@ class User implements UserInterface
     {
         return $this->roles;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
 }
 
