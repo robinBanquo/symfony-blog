@@ -18,8 +18,27 @@
                 <h3 class="navbar-brand">bienvenue sur le blog coda</h3>
                 <ul class="nav navbar-nav navbar-right">
 
-                    <li><a href="/">accueil</a></li>
-                    <li><a href="/add">ajouter un article</a></li>
+                    <li><a href="{{ path('blog_homepage') }}">Accueil</a></li>
+                    {% if is_granted('ROLE_USER') %}
+
+                    <li>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                                {{ app.user.username }}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                {% if is_granted('ROLE_ADMIN') %}
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ path('add_article') }}">ajouter un article</a></li>
+                                <li role="presentation" class="divider"></li>
+                                {%  endif %}
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="{{  path('logout') }}">Déconnexion</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    {%  else %}
+                        <li><a href="{{ path('login') }}">Connexion</a></li>
+                    {% endif %}
                 </ul>
             </nav>
         </header>

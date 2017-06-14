@@ -1,6 +1,10 @@
 <div class="comments">
     <h3>Commentaires</h3>
-    {{ form(form) }}
+    {% if is_granted('ROLE_USER') %}
+        {{ form(form) }}
+    {% else %}
+        <a href="{{ path('login') }}">Connectez-vous</a> pour pouvoir écrire des commentaires
+    {% endif %}
     {% for comment in Comments %}
         <hr>
         <div class="row">
