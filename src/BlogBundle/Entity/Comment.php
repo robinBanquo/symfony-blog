@@ -3,6 +3,7 @@
 namespace BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use UserBundle\Entity\User;
 
 /**
  * Comment
@@ -12,6 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Comment
 {
+    /**
+     * @var
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn
+     */
+    private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="BlogBundle\Entity\Post", inversedBy="comments")
@@ -29,12 +36,6 @@ class Comment
      */
     private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="author", type="string", length=255)
-     */
-    private $author;
 
     /**
      * @var string
@@ -74,30 +75,6 @@ class Comment
     }
 
     /**
-     * Set author
-     *
-     * @param string $author
-     *
-     * @return Comment
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    /**
      * Set content
      *
      * @param string $content
@@ -123,8 +100,6 @@ class Comment
 
     /**
      * Set edited
-     *
-     * @param boolean $edited
      *
      * @return Comment
      */
@@ -181,6 +156,23 @@ class Comment
         $this->post = $Post;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+    }
+
     public function getModifiedDiff()
     {
         $now = new \DateTime();

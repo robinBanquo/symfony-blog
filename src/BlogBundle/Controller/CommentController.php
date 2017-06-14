@@ -29,7 +29,6 @@ class CommentController extends Controller
         $commentToAdd->setPost($Post);
         $formBuilder = $this->get('form.factory')->createBuilder(FormType::class, $commentToAdd);
         $formBuilder
-            ->add('author',     TextType::class)
             ->add('content',   TextareaType::class)
             ->add('save',      SubmitType::class)
         ;

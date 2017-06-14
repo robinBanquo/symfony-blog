@@ -7,12 +7,13 @@ use BlogBundle\Entity\Image;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use BlogBundle\Entity\User;
+use UserBundle\Entity\User;
 use BlogBundle\Entity\Category;
 
 class LoadUser extends AbstractFixture implements OrderedFixtureInterface
 {
     private $UserTable = ["Dieu",
+        "LaMeufADieu",
         "Robin",
         "Audric",
         "Eude",
@@ -27,7 +28,7 @@ class LoadUser extends AbstractFixture implements OrderedFixtureInterface
 
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < 6; $i++) {
+        for ($i = 0; $i < 7; $i++) {
             //$image = new Image();
             //$image->setUrl('http://www.tattoo-tatouages.com/wp-content/uploads/2010/02/britney-spears40.jpg');
 
@@ -36,7 +37,7 @@ class LoadUser extends AbstractFixture implements OrderedFixtureInterface
             $User->setPassword('0');
             //$post->setImage($image);
             $User->setSalt('');
-            ($i===0) ? $User->setRoles(['ROLE_ADMIN']) : $User->setRoles(['ROLE_USER']);
+            ($i < 2) ? $User->setRoles(['ROLE_ADMIN']) : $User->setRoles(['ROLE_USER']);
             $manager->persist($User);
         }
         $manager->flush();
