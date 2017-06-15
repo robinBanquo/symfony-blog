@@ -28,6 +28,9 @@
                                     Créé le :
                                 {% endif %}
                                 {{ post.modifiedat | date("d/m/Y à H:i") }}
+                                <span>
+                                    par {{ post.user.username }}
+                                </span>
                             </small>
                         </p>
                         <p>{{ post.content[:400] }}
