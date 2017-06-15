@@ -27,6 +27,7 @@ class CommentController extends Controller
 
         $commentToAdd = new Comment();
         $commentToAdd->setPost($Post);
+        $commentToAdd->setUser($this->getUser());
         $formBuilder = $this->get('form.factory')->createBuilder(FormType::class, $commentToAdd);
         $formBuilder
             ->add('content',   TextareaType::class)
@@ -35,11 +36,15 @@ class CommentController extends Controller
         $form = $formBuilder->getForm();
 
         if ($request->isMethod('POST')) {
+
             $form->handleRequest($request);
+
             // On vérifie que les valeurs entrées sont correctes
             // On enregistre notre objet $advert dans la base de données, par exemple
             $em = $this->getDoctrine()->getManager();
             $em->persist($commentToAdd);
+            dump($commentToAdd);
+            die();
             $em->flush();
             $request->getSession()->getFlashBag()->add('notice', 'Commentaire ajouté');
 
