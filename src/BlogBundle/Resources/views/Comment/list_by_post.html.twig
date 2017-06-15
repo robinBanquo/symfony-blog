@@ -1,7 +1,15 @@
 <div class="comments">
     <h3>Commentaires</h3>
     {% if is_granted('ROLE_USER') %}
-        {{ form(form) }}
+
+        {{ form_start(form, {"action" : "/addcomment/" ~ post_id}) }}
+        {{ form_errors(form) }}
+
+        {{ form_row(form.content) }}
+
+        {{ form_row(form.save) }}
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
     {% else %}
         <a href="{{ path('login') }}">Connectez-vous</a> pour pouvoir écrire des commentaires
     {% endif %}

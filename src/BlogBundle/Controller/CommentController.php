@@ -27,7 +27,8 @@ class CommentController extends Controller
 
         $commentToAdd = new Comment();
         $commentToAdd->setPost($Post);
-        $commentToAdd->setUser($this->getUser());
+
+
         $formBuilder = $this->get('form.factory')->createBuilder(FormType::class, $commentToAdd);
         $formBuilder
             ->add('content',   TextareaType::class)
@@ -36,15 +37,12 @@ class CommentController extends Controller
         $form = $formBuilder->getForm();
 
         if ($request->isMethod('POST')) {
-
+            $commentToAdd->setUser($this->getUser());
             $form->handleRequest($request);
-
             // On vérifie que les valeurs entrées sont correctes
             // On enregistre notre objet $advert dans la base de données, par exemple
             $em = $this->getDoctrine()->getManager();
             $em->persist($commentToAdd);
-            dump($commentToAdd);
-            die();
             $em->flush();
             $request->getSession()->getFlashBag()->add('notice', 'Commentaire ajouté');
 
@@ -52,6 +50,7 @@ class CommentController extends Controller
         }
         return $this->render('BlogBundle:Comment:list_by_post.html.twig', array(
             'Comments' => $Comments,
+            'post_id' => $Post->getId(),
             'form' =>$form->createview()
         ));
     }

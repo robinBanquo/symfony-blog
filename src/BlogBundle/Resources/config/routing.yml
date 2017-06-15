@@ -6,12 +6,19 @@ add_article:
     path: /add
     defaults: { _controller: BlogBundle:Post:add}
 
+add_comment:
+    path: /addcomment/{id}
+    defaults:
+        _controller : BlogBundle:Comment:ListByPost
+    requirements:
+        id: \d+
+
 blog_show:
     path: /{id}
     defaults:
         _controller : BlogBundle:Post:show
     requirements:
-            id: \d+
+        id: \d+
 edit:
     path: /edit/{id}
     defaults:
