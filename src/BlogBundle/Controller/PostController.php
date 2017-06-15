@@ -44,6 +44,7 @@ class PostController extends Controller
         ;
         $form = $formBuilder->getForm();
         if ($request->isMethod('POST')) {
+            $post->setUser($this->getUser());
             $form->handleRequest($request);
             // On vérifie que les valeurs entrées sont correctes
             // On enregistre notre objet $advert dans la base de données, par exemple

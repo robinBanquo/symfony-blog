@@ -38,3 +38,10 @@ index_by_category:
         _controller : BlogBundle:Category:indexByCategory
     requirements:
             id : \d+
+
+index_by_author:
+    path: /author/{id}
+    defaults:
+        _controller : BlogBundle:Author:indexByAuthor
+    requirements:
+            id : \d+

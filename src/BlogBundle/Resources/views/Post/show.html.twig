@@ -14,7 +14,7 @@
                     {% endif %}
                     {{ Post.modifiedat | date("d/m/Y à H:i") }}
                     <span>
-                        par {{ Post.user.username }}
+                        par <a href="{{ path('index_by_author', {"id" : Post.user.id})}}">{{ Post.user.username }}</a>
                     </span>
                 </p>
                 <p>{{ Post.content }}</p>
